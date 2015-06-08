@@ -24,10 +24,14 @@ exports.index = function (req, res) {
     // si existe una busqueda se arma el query con el ORM
     // http://docs.sequelizejs.com/en/latest/docs/querying/#operators
     if (req.query.search) {
+
+        // Segundo Apartado reemplazar espacios por %
+        var search = req.query.search.replace(' ','%');
+
         query = {
             where: {
                 pregunta: {
-                    $like: '%'+req.query.search+'%'
+                    $like: '%'+search+'%'
                 }
             }
         }
