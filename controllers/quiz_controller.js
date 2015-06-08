@@ -16,7 +16,25 @@ exports.load = function (req, res, next, quizId){
 
 // GET /quizes
 exports.index = function (req, res) {
-    models.Quiz.findAll().then(
+
+    // Tarea del Módulo 7
+    // La busqueda la parametriza vacía
+    var query = undefined;
+
+    // si existe una busqueda se arma el query con el ORM
+    // http://docs.sequelizejs.com/en/latest/docs/querying/#operators
+    if (req.query.search) {
+        query = {
+            where: {
+                pregunta: {
+                    $like: '%'+req.query.search+'%'
+                }
+            }
+        }
+    }
+
+    // se envia el query al findAll, si esta undefined muestro todos, si hay una busqueda filtra
+    models.Quiz.findAll(query).then(
         function (quizes) {
             res.render('quizes/index', {quizes: quizes});
         }

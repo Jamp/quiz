@@ -1,6 +1,18 @@
 
+    <form action="/quizes">
+        <label for="search">
+            Buscar:
+            <input id="search" type="text" name="search">
+        </label>
+        <input type="submit" value="Buscar">
+    </form>
+
     <table>
-        <% for (var i=0; i < quizes.length; i++) { %>
+        <% if (quizes.length == 0) { %>
+        <tr>
+            <td>No hay resultados</td>
+        </tr>
+        <% } for (var i=0; i < quizes.length; i++) { %>
         <tr>
             <td><%= i + 1 %></td>
             <td class="pregunta"><a href="/quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
