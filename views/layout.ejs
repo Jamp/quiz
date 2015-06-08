@@ -3,26 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Quiz</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/wide.css" media="only screen and (min-width: 530px) and (min-device-width: 481px)">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/smartphone.css" media="only screen and (max-width: 480px)">
 </head>
 <body>
 
     <div id="page-wrap">
-        <header class="main">
-            <h2>Quiz: el juego de  las preguntas</h2>
+        <header class="main" id="h1">
+            <h2>Quiz<span>: el juego de  las preguntas</span></h2>
         </header>
 
-        <nav class="main" role="navigator">
+        <nav class="main" id="n1" role="navigator">
             <span><a href="/">Inicio</a></span>
             <span><a href="/quizes/question">Preguntas</a></span>
         </nav>
 
-        <section class="main">
+        <section class="main" id="s1">
             <%- body %>
         </section>
 
-        <footer class="">
+        <footer class="main" id="f1">
             <a href="http://es.wikipedia.org/wiki/Quiz">
                 ¿Que es un Quiz
             </a>
