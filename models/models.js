@@ -40,12 +40,12 @@ sequelize.sync().then(function() {
 
         // Primera Pregunta
         Quiz.create({
-            pregunta: 'Capital de Italia', respuesta: 'Roma'
+            pregunta: 'Capital de Italia', respuesta: 'Roma', tema: "Humanidades"
         });
 
         // Segunda Pregunta y mensajito
         Quiz.create({
-            pregunta: 'Capital de Portugal', respuesta: 'Lisboa'
+            pregunta: 'Capital de Portugal', respuesta: 'Lisboa', tema: "Humanidades"
         }).then(function () {
                 console.log('Base de datos inicializada, datos cargados!!!')
         });
