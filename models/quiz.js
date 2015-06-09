@@ -4,11 +4,11 @@ module.exports = function (sequelize, Datatypes) {
     return sequelize.define('Quiz', {
         pregunta:  {
             type: Datatypes.STRING,
-            validate: { notEmpty: {msg: 'No puede guardar una pregunta vacía'} }
+            validate: { notEmpty: {msg: 'La pregunta no puede estar vacía'} }
         },
         respuesta: {
             type: Datatypes.STRING,
-            validate: { notEmpty: {msg: 'No puede guardar una respuesta vacía'} }
+            validate: { notEmpty: {msg: 'La respuesta no puede estar vacía'} }
         }
     });
 };
