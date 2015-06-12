@@ -13,3 +13,5 @@ nav span { margin: 0 10px 0 0; }
 
 /* Adicional para que se vea bien */
 td.pregunta, td.tema {padding-left: 8px; text-align: left;}
+
+ul>li{ list-style: none; }

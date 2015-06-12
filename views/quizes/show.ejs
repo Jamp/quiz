@@ -3,4 +3,14 @@
         Pregunta <%= quiz.pregunta %><p>
         <input type="text" name="respuesta" value="Responde Aquí">
         <input type="submit" value="Responder">
-    </form>
+    </form><br>
+
+    <p><a href="/quizes/<%=quiz.id%>/comment/new"><button>Nuevo Comentario</button></a></p><br>
+
+    <p><b>Comentarios:</b><br>
+    <ul>
+    <% for (index in quiz.Comments) { %>
+        <li><%= quiz.Comments[index].texto %></li>
+    <% } %>
+    </ul>
+    </p>
