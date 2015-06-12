@@ -1,3 +1,11 @@
+exports.loginRequired = function (req, res, next) {
+    if (res.session.user) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+};
+
 // GET /login
 exports.new = function (req, res) {
     var errors = req.session.errors || {};
@@ -18,8 +26,6 @@ exports.create = function (req, res) {
             res.redirect("/login");
             return;
         }
-
-        console.log(req.session.redir.toString());
         req.session.user = {id: user.id, username: user.username};
         res.redirect(req.session.redir.toString());
     });

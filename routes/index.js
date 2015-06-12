@@ -20,18 +20,23 @@ router.param('quizId', quizController.load);
 
 
 router.get('/quizes', quizController.index);
-router.get('/quizes/new', quizController.new);
-router.post('/quizes/create', quizController.create);
-
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
-router.get('/quizes/:quizId(\\d+)/edit', quizController.edit);
-router.put('/quizes/:quizId(\\d+)', quizController.update);
-router.delete('/quizes/:quizId(\\d+)', quizController.destroy);
+
+// Router Restricted
+router.get('/quizes/new', sessionController.loginRequired, quizController.new);
+router.post('/quizes/create', sessionController.loginRequired, quizController.create);
+router.get('/quizes/:quizId(\\d+)/edit', sessionController.loginRequired, quizController.edit);
+router.put('/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.update);
+router.delete('/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.destroy);
 
 // Comment
-router.get('/quizes/:quizId(\\d+)/comment/new', commentController.new);
-router.post('/quizes/:quizId(\\d+)/comment', commentController.create);
+router.param('commentId', commentController.load);
+
+router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
+router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
+
+router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', commentController.publish);
 
 
 // Objetivo 2 de la tarea
