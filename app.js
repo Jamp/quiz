@@ -36,6 +36,33 @@ app.use(function (req, res, next){
     next();
 });
 
+// Middleware para auto-logout de sesiones
+// todo los cambios los determinamos en segundos
+app.use(function (req, res, next) {
+
+    // Verificamos que haya un sesión activa
+    if (req.session.user) {
+        // Determinamos los 120 segundo(2min) de la sesión
+        var tiempo = 120;
+        var now = Math.floor(new Date().getTime()/1000);
+        var last = req.session.last
+
+        // Si el tiempo a transcurrido, se destruye la sesión y redirecciona a login su
+        // respectivo de mensaje
+        if ((now-last) >= tiempo) {
+            delete req.session.user;
+            res.render('session/new', {errors: [{message: "Sesión cerrada por inactividad"}]});
+            return;
+        } else {
+            // Si todavía hay tiempo actualizamos la hora de última operación
+            req.session.last = now;
+        }
+    }
+
+    next();
+});
+
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler

@@ -26,6 +26,8 @@ exports.create = function (req, res) {
             res.redirect("/login");
             return;
         }
+        var now = Math.floor(new Date().getTime()/1000);
+        req.session.last = now;
         req.session.user = {id: user.id, username: user.username};
         res.redirect(req.session.redir.toString());
     });
