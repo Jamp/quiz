@@ -30,6 +30,9 @@ router.get('/quizes/:quizId(\\d+)/edit', sessionController.loginRequired, quizCo
 router.put('/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.update);
 router.delete('/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.destroy);
 
+// Asignación adicional
+router.get('/quizes/statistics', sessionController.loginRequired, quizController.statistics);
+
 // Comment
 router.param('commentId', commentController.load);
 

@@ -1,0 +1,37 @@
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Preguntas', 'Comentarios'],
+          ['Preguntas sin Comentario',  <%= ceroComentarios %>],
+          ['Preguntas con Comentarios', <%= unoOMasComentarios %>],
+        ]);
+
+        var options = {
+          title: 'Preguntas sin Comentarios/con Comentarios'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+    <table>
+        <tr>
+            <th>Cantidad de Preguntas</th>
+            <th>Cantidad de Comentarios</th>
+            <th>Promedio de Comentarios</th>
+        </tr>
+        <tr>
+            <td><%= cantidadPreguntas %></td>
+            <td><%= cantidadComentarios %></td>
+            <td><%= promedioComentarios %> x Pregunta</td>
+        </tr>
+    </table>
+
+    <div id="piechart" style="width: 450px; height: 150px;"></div>

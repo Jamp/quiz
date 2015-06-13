@@ -14,5 +14,9 @@ nav span { margin: 0 10px 0 0; }
 .right { float: right; }
 
 /* Adicional para que se vea bien */
+table {margin: 8px auto; border: 1px #999 solid;}
+th {padding: 8px; border: 1px #999 solid;}
+td {background-color: white; border: 1px #999 solid; padding: 8px;}
 td.pregunta, td.tema {padding-left: 8px; text-align: left;}
 ul>li{ list-style: none; }
+#piechart {height: 150px; margin: 0 auto; padding: 10px 0; width: 450px;}

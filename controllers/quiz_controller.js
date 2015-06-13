@@ -1,3 +1,5 @@
+// Cargar Modelo ORM
+var Sequelize = require('sequelize');
 var models = require('../models/models');
 
 // Autoload de Quizes
@@ -122,3 +124,59 @@ exports.destroy = function(req, res, next) {
         res.redirect('/quizes');
     }).catch(function (error) {next(error); });
 };
+
+
+// Asignación Adicional
+// GET /quizes/statistics
+exports.statistics = function (req, res, next) {
+    var cantidadPreguntas = 0;
+    var cantidadComentarios = 0;
+    var promedioComentarios = 0;
+    var ceroComentarios = 0;
+    var unoOMasComentarios = 0;
+
+    var contadorCallback = 0;
+    var totalCallback = 3;
+
+    var renderCallback = function () {
+        if (contadorCallback == totalCallback) {
+            // Promedio de comentarios por pregunta
+            promedioComentarios = Math.floor(cantidadComentarios/cantidadPreguntas);
+
+            // Número de preguntas sin comentarios
+            ceroComentarios = cantidadPreguntas - unoOMasComentarios;
+
+            res.render('quizes/statistics', {
+                cantidadPreguntas: cantidadPreguntas,
+                cantidadComentarios: cantidadComentarios,
+                promedioComentarios: promedioComentarios,
+                ceroComentarios: ceroComentarios,
+                unoOMasComentarios: unoOMasComentarios,
+                errors: []
+            });
+        }
+    };
+
+    // Número de preguntas
+    models.Quiz.count().then(function(numero){
+        contadorCallback++;
+        cantidadPreguntas = numero
+        renderCallback();
+    });
+
+    // Número de comentarios totales
+    models.Comment.count().then(function(numero){
+        contadorCallback++;
+        cantidadComentarios = numero
+        renderCallback();
+    });
+
+    // Número de preguntas con comentarios
+    models.Comment.count({
+        group: ['QuizId']
+    }).then(function(numero){
+        contadorCallback++;
+        unoOMasComentarios = numero.length;
+        renderCallback();
+    });
+}

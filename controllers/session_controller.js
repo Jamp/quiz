@@ -1,5 +1,5 @@
 exports.loginRequired = function (req, res, next) {
-    if (res.session.user) {
+    if (req.session.user) {
         next();
     } else {
         res.redirect('/login');
@@ -27,8 +27,7 @@ exports.create = function (req, res) {
             return;
         }
         var now = Math.floor(new Date().getTime()/1000);
-        req.session.last = now;
-        req.session.user = {id: user.id, username: user.username};
+        req.session.user = {id: user.id, username: user.username, last: now};
         res.redirect(req.session.redir.toString());
     });
 };

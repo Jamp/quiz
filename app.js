@@ -45,7 +45,7 @@ app.use(function (req, res, next) {
         // Determinamos los 120 segundo(2min) de la sesión
         var tiempo = 120;
         var now = Math.floor(new Date().getTime()/1000);
-        var last = req.session.last
+        var last = req.session.user.last;
 
         // Si el tiempo a transcurrido, se destruye la sesión y redirecciona a login su
         // respectivo de mensaje
