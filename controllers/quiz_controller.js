@@ -141,7 +141,7 @@ exports.statistics = function (req, res, next) {
     var renderCallback = function () {
         if (contadorCallback == totalCallback) {
             // Promedio de comentarios por pregunta
-            promedioComentarios = Math.floor(cantidadComentarios/cantidadPreguntas);
+            promedioComentarios = (cantidadComentarios/cantidadPreguntas).toFixed(1);
 
             // Número de preguntas sin comentarios
             ceroComentarios = cantidadPreguntas - unoOMasComentarios;
